@@ -1,0 +1,150 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr084_expensereports",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr084_expensereport",
+    "MaxGetRowsCount": 500,
+    "Name": "Expense Reports",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr084_approvaltype": "Approval Type",
+      "cr084_date": "Start Date",
+      "cr084_Employee": "Employee",
+      "cr084_enddate": "End Date",
+      "cr084_expensereport_AsyncOperations": "System Jobs",
+      "cr084_expensereport_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr084_ExpenseReport_cr084_ExpenseReport_cr084_ExpenseReportDetail": "Expense Report Details",
+      "cr084_expensereport_DuplicateBaseRecord": "Duplicate Records (cr084_expensereport_DuplicateBaseRecord)",
+      "cr084_expensereport_DuplicateMatchingRecord": "Duplicate Records (cr084_expensereport_DuplicateMatchingRecord)",
+      "cr084_expensereport_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr084_expensereport_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr084_expensereport_ProcessSession": "Process Sessions",
+      "cr084_expensereport_SyncErrors": "Sync Errors",
+      "cr084_expensereportid": "Expense Report",
+      "cr084_notes": "Notes",
+      "cr084_reportstatus": "Report Status",
+      "cr084_title": "Event",
+      "cr084_total": "Total",
+      "cr084_total_base": "Total (Base)",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "exchangerate": "Exchange Rate",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "transactioncurrencyid": "Currency",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Expense Reports",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Expense Reports (Views)",
+    "Name": "_cr084_expensereport_views",
+    "RelatedEntityName": "Expense Reports",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "103d8042-b3e7-40ab-8a58-77cd6b22896e": "Inactive Expense Reports",
+      "71752030-abde-416d-b877-b4367ca6e9b8": "Expense Report Advanced Find View",
+      "c7396186-4da2-44d6-b1d1-639b09962d74": "Expense Report Associated View",
+      "d62d2fb0-b35c-4a41-897d-96bacd2ccadf": "Expense Report Lookup View",
+      "fb0eb967-6934-42ec-bb28-ed53b86a4659": "Active Expense Reports"
+    }
+  },
+  {
+    "DisplayName": "Approval Types",
+    "Name": "cr084_approvaltypes",
+    "OptionSetInfoNameMapping": {
+      "1": "Pre-Approval",
+      "2": "Requires-Approval"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr084_approvaltype",
+        "OptionSetReferenceEntityName": "Expense Reports"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cr084_approvaltype",
+    "RelatedEntityName": "Expense Reports",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Expense Reports)",
+    "Name": "cr084_expensereport_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Expense Reports"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Expense Reports",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Expense Reports)",
+    "Name": "cr084_expensereport_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Expense Reports"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Expense Reports",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Report Status Choices",
+    "Name": "cr084_reportstatus",
+    "OptionSetInfoNameMapping": {
+      "1": "Draft",
+      "2": "Awaiting Approval",
+      "3": "Approved",
+      "4": "Denied"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr084_reportstatus",
+        "OptionSetReferenceEntityName": "Expense Reports"
+      }
+    },
+    "OptionSetTypeKey": "MultiSelectPicklistType",
+    "RelatedColumnInvariantName": "cr084_reportstatus",
+    "RelatedEntityName": "Expense Reports",
+    "Type": "OptionSetInfo"
+  }
+]

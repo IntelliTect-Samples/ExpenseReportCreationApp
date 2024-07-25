@@ -1,0 +1,111 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr084_expensereportdetails",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr084_expensereportdetail",
+    "MaxGetRowsCount": 500,
+    "Name": "Expense Report Details",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr084_amount": "Amount",
+      "cr084_amount_base": "Amount (Base)",
+      "cr084_associatedevent": "Associated Event",
+      "cr084_billiable": "Billiable",
+      "cr084_category": "Category",
+      "cr084_expense": "Expense",
+      "cr084_expensedescription": "Expense Description",
+      "cr084_ExpenseReport": "Expense Report",
+      "cr084_expensereportdetail_AsyncOperations": "System Jobs",
+      "cr084_expensereportdetail_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr084_expensereportdetail_DuplicateBaseRecord": "Duplicate Records (cr084_expensereportdetail_DuplicateBaseRecord)",
+      "cr084_expensereportdetail_DuplicateMatchingRecord": "Duplicate Records (cr084_expensereportdetail_DuplicateMatchingRecord)",
+      "cr084_expensereportdetail_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr084_expensereportdetail_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr084_expensereportdetail_ProcessSession": "Process Sessions",
+      "cr084_expensereportdetail_SyncErrors": "Sync Errors",
+      "cr084_expensereportdetailid": "Expense Report Detail",
+      "cr084_project": "Project",
+      "cr084_receipt": "Receipt",
+      "cr084_receiptid": "cr084_ReceiptId",
+      "cr084_transactiondate": "Transaction Date",
+      "cr084_vendor": "Vendor",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "exchangerate": "Exchange Rate",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "transactioncurrencyid": "Currency",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Expense Report Details",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Expense Report Details (Views)",
+    "Name": "_cr084_expensereportdetail_views",
+    "RelatedEntityName": "Expense Report Details",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "25ccd509-fac8-4625-bf65-c8e6ccea6c3d": "Active Expense Report Details",
+      "4a2feef0-13d8-4455-8860-63364a7bec11": "Expense Report Detail Associated View",
+      "70e1c9e8-a573-461d-a2e9-2cf5f82ca05f": "Expense Report Detail Advanced Find View",
+      "74cf61ed-1de7-4a92-b06b-b04949598ed1": "Expense Report Detail Lookup View",
+      "d7285c52-361a-4d51-80e8-187238f11dcb": "Inactive Expense Report Details"
+    }
+  },
+  {
+    "DisplayName": "Status (Expense Report Details)",
+    "Name": "cr084_expensereportdetail_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Expense Report Details"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Expense Report Details",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Expense Report Details)",
+    "Name": "cr084_expensereportdetail_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Expense Report Details"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Expense Report Details",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,937 @@
+EditExpense_Screen As screen:
+    Fill: =
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: |-
+        =If(VarExpenseMode="New", Set(VarExpense, Blank()))
+        ; ClearCollect(
+            ColExpenseDetails,
+            Filter(
+                'Expense Report Details',
+                'Expense Report'.'Expense Report' = VarExpense.'Expense Report'
+            )
+        )
+
+    Lbl_Header_EditExpense As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        Fill: =RGBA(0, 46, 92, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =92
+        PaddingLeft: =64
+        PaddingRight: =64
+        Size: =21
+        Text: ="Expense Report For " & VarUser.FullName
+        Width: =640
+        ZIndex: =1
+
+    "Gal_ExpenseDetails_EditExpense As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver5.0'":
+        BorderColor: =RGBA(0, 46, 92, 1)
+        DelayItemLoading: =true
+        Height: =500
+        Items: =ColExpenseDetails
+        Layout: =Layout.Vertical
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplatePadding: =0
+        TemplateSize: =261
+        Width: =560
+        X: =40
+        Y: =432
+        ZIndex: =1
+
+        Separator3 As rectangle:
+            BorderColor: |
+                =RGBA(0, 46, 92, 1)
+            Fill: =RGBA(0,46,92,1)
+            FocusedBorderThickness: =1
+            Height: =8
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - Self.Height
+            ZIndex: =4
+
+        Rectangle3 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 46, 92, 1)
+            FocusedBorderThickness: =1
+            Height: =Parent.TemplateHeight - Separator3.Height
+            OnSelect: =Select(Parent)
+            Visible: =ThisItem.IsSelected
+            Width: =4
+            ZIndex: =5
+
+        Txt_Expense_EditExpense As text:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            Color: =RGBA(0, 46, 92, 1)
+            Default: =ThisItem.Expense
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Font: =Font.'Segoe UI'
+            Height: =31
+            HintText: ="Expense Item"
+            HoverBorderColor: =RGBA(16, 110, 190, 1)
+            HoverColor: =RGBA(50, 49, 48, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnSelect: =Select(Parent)
+            PressedBorderColor: =RGBA(0, 120, 212, 1)
+            PressedColor: =RGBA(50, 49, 48, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =191
+            X: =21
+            Y: =13
+            ZIndex: =6
+
+        Ddn_Category_EditExpense As dropdown:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            ChevronBackground: =RGBA(245, 245, 245, 1)
+            ChevronDisabledBackground: =RGBA(242, 242, 241, 0)
+            ChevronDisabledFill: =RGBA(161, 159, 157, 1)
+            ChevronFill: =RGBA(0, 46, 92, 1)
+            ChevronHoverBackground: =RGBA(245, 245, 245, 1)
+            ChevronHoverFill: =RGBA(50, 49, 48, 1)
+            Color: =RGBA(50, 49, 48, 1)
+            Default: =ThisItem.Category
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Fill: =RGBA(245, 245, 245, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            HoverBorderColor: =RGBA(16, 110, 190, 1)
+            HoverColor: =RGBA(50, 49, 48, 1)
+            HoverFill: =RGBA(245, 245, 245, 1)
+            Items: =["General","Travel","Meals & Entertainment"]
+            OnSelect: =Select(Parent)
+            PaddingBottom: =5
+            PaddingLeft: =12
+            PaddingRight: =5
+            PaddingTop: =5
+            PressedBorderColor: =RGBA(16, 110, 190, 1)
+            PressedFill: =RGBA(0, 120, 212, 1)
+            SelectionColor: =RGBA(50, 49, 48, 1)
+            SelectionFill: =RGBA(0, 120, 212, 1)
+            Size: =14
+            Width: =191
+            X: =21
+            Y: =56
+            ZIndex: =7
+
+        Dte_TransactionDate_EditExpense As datepicker:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            CalendarHeaderFill: =RGBA(16, 110, 190, 1)
+            Color: =RGBA(50, 49, 48, 1)
+            DefaultDate: =ThisItem.'Transaction Date'
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Fill: =RGBA(245, 245, 245, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            HoverDateFill: =RGBA(184, 187, 184, 1)
+            IconBackground: =RGBA(0, 120, 212, 1)
+            InputTextPlaceholder: |
+                =If(IsBlank(Self.SelectedDate), Text(Dte_Start_EditExpense.SelectedDate, Self.Format, Self.Language), Text(Self.SelectedDate, Self.Format, Self.Language))
+            OnChange: |-
+                =If(Dte_TransactionDate_EditExpense.SelectedDate < Dte_Start_EditExpense.SelectedDate, Notify("Transaction date must be greater than or equal to the Start Date", NotificationType.Error));
+                If(Dte_TransactionDate_EditExpense.SelectedDate > Dte_End_EditExpense.SelectedDate, Notify("Transaction date must be Less than or equal to the End Date", NotificationType.Error));
+                If(Dte_TransactionDate_EditExpense.SelectedDate < Dte_Start_EditExpense.SelectedDate, Reset(Dte_TransactionDate_EditExpense));
+                If(Dte_TransactionDate_EditExpense.SelectedDate > Dte_End_EditExpense.SelectedDate, Reset(Dte_TransactionDate_EditExpense));
+            OnSelect: =Select(Parent)
+            PaddingTop: =5
+            SelectedDateFill: =RGBA(0, 120, 212, 1)
+            Width: =204
+            X: =276
+            Y: =56
+            ZIndex: =8
+
+        Txt_Amount_EditExpense As text:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            Color: =RGBA(0, 46, 92, 1)
+            Default: |-
+                =Text(ThisItem.Amount, "$#,###.00")
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Font: =Font.'Segoe UI'
+            Format: =TextFormat.Number
+            Height: =31
+            HintText: ="$ Amount"
+            HoverBorderColor: =RGBA(16, 110, 190, 1)
+            HoverColor: =RGBA(50, 49, 48, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnChange: |
+                =false
+            OnSelect: =Select(Parent)
+            PressedBorderColor: =RGBA(0, 120, 212, 1)
+            PressedColor: =RGBA(50, 49, 48, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =204
+            X: =276
+            Y: =13
+            ZIndex: =9
+
+        Icn_Trash_Edit_expense As icon.Trash:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Color: =RGBA(184, 0, 0, 1)
+            DisabledBorderColor: =RGBA(245, 245, 245, 1)
+            DisabledColor: =RGBA(225, 223, 221, 1)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            FocusedBorderThickness: =4
+            Height: =34
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverColor: =RGBA(16, 110, 190, 1)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            Icon: =Icon.Trash
+            OnSelect: =Remove(ColExpenseDetails, ThisItem)
+            PressedBorderColor: =RGBA(0, 0, 0, 0)
+            PressedColor: =RGBA(16, 110, 190, 1)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            Width: =48
+            X: =499
+            Y: =211
+            ZIndex: =10
+
+        AddMediaWithImage2 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =11
+
+            Img_Receipt_EditExpense As image:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =2
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =24
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Image: |+
+                    =If(IsBlank(ThisItem.Receipt),
+                        If(IsBlank(MdBtn_AddReceipt_EditExpense.Media),
+                         SampleImage, 
+                         MdBtn_AddReceipt_EditExpense.Media
+                        ),
+                        If(IsBlank(MdBtn_AddReceipt_EditExpense.Media),
+                         ThisItem.Receipt.Value, 
+                         MdBtn_AddReceipt_EditExpense.Media
+                        )
+                    )
+                    
+                ImagePosition: =ImagePosition.Fill
+                OnSelect: =Select(Parent)
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Transparency: =100
+                Width: =152
+                X: =247
+                Y: =162
+                ZIndex: =12
+
+            MdBtn_AddReceipt_EditExpense As addMedia:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                ChangePictureText: ="Receipt Uploaded"
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(161, 159, 157, 1)
+                DisabledFill: =RGBA(242, 242, 241, 0)
+                Fill: =RGBA(0, 120, 212, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =24
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(16, 110, 190, 1)
+                OnSelect: =Select(Parent)
+                PressedBorderColor: =RGBA(0, 69, 120, 1)
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(16, 110, 190, 1)
+                Size: =12
+                Text: =If(IsBlank(ThisItem.Receipt), "Add Receipt", "Update Receipt")
+                UseMobileCamera: =true
+                Width: =152
+                X: =302
+                Y: =216
+                ZIndex: =13
+
+        Ddn_Billable_EditExpense As dropdown:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            ChevronBackground: =RGBA(245, 245, 245, 1)
+            ChevronDisabledBackground: =RGBA(242, 242, 241, 0)
+            ChevronDisabledFill: =RGBA(161, 159, 157, 1)
+            ChevronFill: =RGBA(50, 49, 48, 1)
+            ChevronHoverBackground: =RGBA(245, 245, 245, 1)
+            ChevronHoverFill: =RGBA(50, 49, 48, 1)
+            Color: =RGBA(0, 46, 92, 1)
+            Default: =ThisItem.Billiable
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Fill: =RGBA(245, 245, 245, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            HoverBorderColor: =RGBA(16, 110, 190, 1)
+            HoverColor: =RGBA(50, 49, 48, 1)
+            HoverFill: =RGBA(245, 245, 245, 1)
+            Items: =["Non-Billable","Billable"]
+            OnSelect: =Select(Parent)
+            PaddingBottom: =5
+            PaddingLeft: =12
+            PaddingRight: =5
+            PaddingTop: =5
+            PressedBorderColor: =RGBA(16, 110, 190, 1)
+            PressedFill: =RGBA(0, 120, 212, 1)
+            SelectionColor: =RGBA(50, 49, 48, 1)
+            SelectionFill: =RGBA(0, 120, 212, 1)
+            Size: =14
+            Width: =191
+            X: =21
+            Y: =103
+            ZIndex: =14
+
+        Txt_Vendor_EditExpense As text:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            Color: =RGBA(0, 46, 92, 1)
+            Default: =ThisItem.Vendor
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            HintText: ="Vendor/Client"
+            HoverBorderColor: =RGBA(16, 110, 190, 1)
+            HoverColor: =RGBA(50, 49, 48, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnSelect: =Select(Parent)
+            PressedBorderColor: =RGBA(0, 120, 212, 1)
+            PressedColor: =RGBA(50, 49, 48, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =191
+            X: =21
+            Y: =152
+            ZIndex: =15
+
+        Txt_Description_EditExpense As text:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            Color: =RGBA(0, 46, 92, 1)
+            Default: =ThisItem.'Expense Description'
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Font: =Font.'Segoe UI'
+            Height: =97
+            HintText: ="Description of Expense"
+            HoverBorderColor: =RGBA(16, 110, 190, 1)
+            HoverColor: =RGBA(50, 49, 48, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            Mode: =TextMode.MultiLine
+            OnSelect: =Select(Parent)
+            PressedBorderColor: =RGBA(0, 120, 212, 1)
+            PressedColor: =RGBA(50, 49, 48, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =12
+            Width: =271
+            X: =276
+            Y: =103
+            ZIndex: =16
+
+        Txt_ProjectName_EditExpense As text:
+            BorderColor: =RGBA(245, 245, 245, 1)
+            Color: =RGBA(0, 46, 92, 1)
+            Default: =ThisItem.Project
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(161, 159, 157, 1)
+            DisabledFill: =RGBA(242, 242, 241, 0)
+            Font: =Font.'Segoe UI'
+            Height: =27
+            HintText: ="Project"
+            HoverBorderColor: =RGBA(16, 110, 190, 1)
+            HoverColor: =RGBA(50, 49, 48, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnSelect: =Select(Parent)
+            PressedBorderColor: =RGBA(0, 120, 212, 1)
+            PressedColor: =RGBA(50, 49, 48, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =191
+            X: =21
+            Y: =200
+            ZIndex: =17
+
+    Icn_Back_EditExpense As icon.BackArrow:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(245, 245, 245, 1)
+        DisabledColor: =RGBA(225, 223, 221, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =50
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =RGBA(16, 110, 190, 1)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.BackArrow
+        OnSelect: =Back()
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =RGBA(16, 110, 190, 1)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        X: =9
+        Y: =21
+        ZIndex: =2
+
+    Lbl_Event_EditExpenses As label:
+        BorderColor: =RGBA(0, 69, 120, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 46, 92, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =70
+        PaddingTop: =20
+        Size: =21
+        Text: ="Expense Event"
+        VerticalAlign: =VerticalAlign.Top
+        Width: =560
+        X: =40
+        Y: =111
+        ZIndex: =3
+
+    Txt_Event_EditExpenses As text:
+        BorderColor: =RGBA(0, 46, 92, 1)
+        Color: =RGBA(0, 46, 92, 1)
+        Default: =VarExpense.Event
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        DisabledFill: =RGBA(242, 242, 241, 0)
+        EnableSpellCheck: =true
+        Font: =Font.'Segoe UI'
+        Height: =50
+        HintText: ="Event Name"
+        HoverBorderColor: =RGBA(16, 110, 190, 1)
+        HoverColor: =RGBA(50, 49, 48, 1)
+        HoverFill: =RGBA(255, 255, 255, 1)
+        PressedBorderColor: =RGBA(0, 120, 212, 1)
+        PressedColor: =RGBA(50, 49, 48, 1)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =18
+        Width: =560
+        X: =40
+        Y: =181
+        ZIndex: =4
+
+    Lbl_StartDate_EditExpense As label:
+        BorderColor: =RGBA(0, 69, 120, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 46, 92, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =70
+        PaddingTop: =20
+        Size: =18
+        Text: ="Start Date"
+        VerticalAlign: =VerticalAlign.Top
+        Width: =560
+        X: =40
+        Y: =231
+        ZIndex: =6
+
+    Lbl_EndDate_EditExpense As label:
+        BorderColor: =RGBA(0, 69, 120, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 46, 92, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =70
+        PaddingTop: =20
+        Size: =18
+        Text: ="End Date"
+        VerticalAlign: =VerticalAlign.Top
+        Width: =560
+        X: =41
+        Y: =292
+        ZIndex: =8
+
+    Dte_End_EditExpense As datepicker:
+        BorderColor: =RGBA(0, 46, 92, 1)
+        CalendarHeaderFill: =RGBA(16, 110, 190, 1)
+        Color: =RGBA(0, 46, 92, 1)
+        DefaultDate: =VarExpense.'End Date'
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        DisabledFill: =RGBA(242, 242, 241, 0)
+        DisplayMode: |
+            =DisplayMode.Edit
+        Fill: =RGBA(245, 245, 245, 1)
+        Font: =Font.'Segoe UI'
+        Height: =46
+        HoverDateFill: =RGBA(184, 187, 184, 1)
+        IconBackground: =RGBA(0, 120, 212, 1)
+        IconFill: =Color.White
+        InputTextPlaceholder: =If(IsBlank(Self.SelectedDate), Text(Today(), Self.Format, Self.Language))
+        OnChange: |
+            =If(Dte_End_EditExpense.SelectedDate < Dte_Start_EditExpense.SelectedDate, Reset(Dte_End_EditExpense));
+            If(Dte_End_EditExpense.SelectedDate < Dte_Start_EditExpense.SelectedDate, Notify("End Date must be greater than or Equal to the date Start Date", NotificationType.Error))
+        PaddingTop: =5
+        SelectedDateFill: =RGBA(0, 120, 212, 1)
+        Size: =16
+        Width: =257
+        X: =344
+        Y: =308
+        ZIndex: =9
+
+    Lbl_Total_EditExpense As label:
+        Align: =Align.Right
+        BorderColor: =RGBA(0, 69, 120, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 46, 92, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =70
+        PaddingTop: =20
+        Size: =21
+        Text: |-
+            ="Total: " & Text(Sum(Gal_ExpenseDetails_EditExpense.AllItems, Value(Txt_Amount_EditExpense.Text)), "$#,###.00")
+        VerticalAlign: =VerticalAlign.Top
+        Width: =303
+        X: =297
+        Y: =936
+        ZIndex: =10
+
+    Icn_Add_EditExpense As icon.Add:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        Color: =RGBA(0, 120, 212, 1)
+        DisabledBorderColor: =RGBA(245, 245, 245, 1)
+        DisabledColor: =RGBA(225, 223, 221, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =40
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =RGBA(16, 110, 190, 1)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.Add
+        OnSelect: =Collect(ColExpenseDetails, {})
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =RGBA(16, 110, 190, 1)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =58
+        X: =41
+        Y: =951
+        ZIndex: =11
+
+    Btn_SaveAsDraft_EditExpesne As button:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        DisabledFill: =RGBA(242, 242, 241, 0)
+        Fill: =RGBA(0, 46, 92, 1)
+        Font: =Font.'Segoe UI'
+        Height: =70
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(16, 110, 190, 1)
+        OnSelect: |
+            =Set(varTotalAmount, Sum(Gal_ExpenseDetails_EditExpense.AllItems, Value(Txt_Amount_EditExpense.Text)));
+            
+            If(Sum(Gal_ExpenseDetails_EditExpense.AllItems, Value(Txt_Amount_EditExpense.Text)) < 200,
+                Set(varApprovalType, 'Approval Types'.'Pre-Approval')
+            );
+            
+            If(Sum(Gal_ExpenseDetails_EditExpense.AllItems, Value(Txt_Amount_EditExpense.Text)) >= 200,
+                Set(varApprovalType, 'Approval Types'.'Requires-Approval')
+            );
+            
+            Set(
+                VarExpense,
+                Patch(
+                'Expense Reports',
+                If(
+                    VarExpenseMode = "New",
+                    Defaults('Expense Reports'),
+                    VarExpense
+                ),
+                {
+                    Event: Txt_Event_EditExpenses.Text,
+                    'Start Date': Dte_Start_EditExpense.SelectedDate,
+                    'End Date': Dte_End_EditExpense.SelectedDate,
+                    'Report Status':['Report Status Choices'.Draft],
+                    'Approval Type': varApprovalType,
+                    Total: varTotalAmount,
+                    Employee: LookUp(
+                            Users,
+                            'Primary Email' = VarUser.Email
+                    )
+                }
+                )
+            );
+            
+            RemoveIf(
+                'Expense Report Details',
+                'Expense Report'.'Expense Report' = VarExpense.'Expense Report'
+            );
+            
+            ForAll(
+                Gal_ExpenseDetails_EditExpense.AllItems,
+                Patch(
+                    'Expense Report Details',
+                    Defaults('Expense Report Details'),
+                    {
+                        Expense: Txt_Expense_EditExpense.Text,
+                        Category: Ddn_Category_EditExpense.Selected.Value,
+                        'Transaction Date': Dte_TransactionDate_EditExpense.SelectedDate,
+                        Amount: Value(Txt_Amount_EditExpense.Text),
+                        'Associated Event': Txt_Event_EditExpenses.Text,
+                        Receipt: Img_Receipt_EditExpense.Image,
+                        Project: Txt_ProjectName_EditExpense.Text,
+                        Vendor: Txt_Vendor_EditExpense.Text,
+                        'Expense Description': Txt_Description_EditExpense.Text,
+                        Billiable: Ddn_Billable_EditExpense.Selected.Value,
+                        'Expense Report': LookUp(
+                            'Expense Reports',
+                            'Expense Report' = VarExpense.'Expense Report'
+                        )
+                    }
+                )
+            );
+            
+            Navigate(AllExpenses_Screen);
+        PressedBorderColor: =RGBA(0, 69, 120, 1)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(16, 110, 190, 1)
+        RadiusBottomLeft: =50
+        RadiusBottomRight: =50
+        RadiusTopLeft: =50
+        RadiusTopRight: =50
+        Size: =24
+        Text: ="Save as Draft"
+        Width: =256
+        X: =41
+        Y: =1006
+        ZIndex: =14
+
+    Btn_Submit_Edit_expense As button:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        DisabledFill: =RGBA(242, 242, 241, 0)
+        Fill: =RGBA(0, 46, 92, 1)
+        Font: =Font.'Segoe UI'
+        Height: =70
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(16, 110, 190, 1)
+        OnSelect: |-
+            =
+            
+            
+            // All Expenses Added together as a total
+            Set(varTotalAmount, Sum(Gal_ExpenseDetails_EditExpense.AllItems, Value(Txt_Amount_EditExpense.Text)));
+            
+            // Used to bypass approvers if the Expense is less than $200
+            If(Sum(Gal_ExpenseDetails_EditExpense.AllItems, Value(Txt_Amount_EditExpense.Text)) < 200,
+                Set(varApprovalType, 'Approval Types'.'Pre-Approval'),
+                Set(varApprovalType, 'Approval Types'.'Requires-Approval')
+            );
+            
+            //Used to set the Expense Report Columns Info and hold data as variable for future recall
+            Set(
+                VarExpense,
+                Patch(
+                'Expense Reports',
+                If(
+                    VarExpenseMode = "New",
+                    Defaults('Expense Reports'),
+                    VarExpense
+                ),
+                {
+                    Event: Txt_Event_EditExpenses.Text,
+                    'Start Date': Dte_Start_EditExpense.SelectedDate,
+                    'End Date': Dte_End_EditExpense.SelectedDate,
+                    'Report Status': If(varApprovalType = [@'Approval Types'].'Requires-Approval', 
+                        ['Report Status Choices'.'Awaiting Approval'],
+                        ['Report Status Choices'.Approved]
+                    ),
+                    'Approval Type': varApprovalType,
+                    Total: varTotalAmount,
+                    Employee: LookUp(
+                            Users,
+                            'Primary Email' = VarUser.Email
+                    )
+                }
+                )
+            );
+            
+            RemoveIf(
+                'Expense Report Details',
+                'Expense Report'.'Expense Report' = VarExpense.'Expense Report'
+            );
+            
+            //Used to set the Expense Report Detail Columns Info with respect to associated Expense Report Record
+            ForAll(
+                Gal_ExpenseDetails_EditExpense.AllItems,
+                Patch(
+                    'Expense Report Details',
+                    Defaults('Expense Report Details'),
+                    {
+                        Expense: Txt_Expense_EditExpense.Text,
+                        Category: Ddn_Category_EditExpense.Selected.Value,
+                        'Transaction Date': Dte_TransactionDate_EditExpense.SelectedDate,
+                        Amount: Value(Txt_Amount_EditExpense.Text),
+                        'Associated Event': Txt_Event_EditExpenses.Text,
+                        Receipt: Img_Receipt_EditExpense.Image,
+                        Vendor: Txt_Vendor_EditExpense.Text,
+                        Project: Txt_ProjectName_EditExpense.Text,
+                        'Expense Description': Txt_Description_EditExpense.Text,
+                        Billiable: Ddn_Billable_EditExpense.Selected.Value,
+                        'Expense Report': LookUp(
+                            'Expense Reports',
+                            'Expense Report' = VarExpense.'Expense Report'
+                        )
+                    }
+                )
+            );
+            
+            // **Set emails here for the Diffrent levels of Approval**
+            ClearCollect( // Accounting
+                colRecipientspreapproval,
+                {Email: "colton.cronquist@intellitect.com"} // Change this to Kim
+            );
+            ClearCollect( // Level 1 Approvers (CTO or CEO)
+                colRecipientsRequiresApprovalLevel1,
+                {Email: "colton.cronquist@intellitect.com"}// Change this to Phil and Grant
+            );
+            ClearCollect( // Level 2 Approvers (Co-founder)
+                colRecipientsRequiresApprovalLevel2,
+                {Email: "colton.cronquist@intellitect.com"} // Change this to Elisabeth
+            );
+            
+            Set(varRecipientsPreApproval, Concat(colRecipientspreapproval, Email & ";"));
+            Set(varRecipientsRequiresApprovalLevel1, Concat(colRecipientsRequiresApprovalLevel1, Email & ";"));
+            Set(varRecipientsRequiresApprovalLevel2, Concat(colRecipientsRequiresApprovalLevel2, Email & ";"));
+            
+            // Pre Approval (less than $200)
+            If(varTotalAmount < 200.00,
+                Office365Outlook.SendEmailV2(
+                    varRecipientsPreApproval,
+                    "An Expense Report is Ready for Review",
+                    VarUser.FullName & " has submitted an expense report for your review." & "<br>" & 
+                    "Expense Event: " &  Txt_Event_EditExpenses.Text & "<br>" & 
+                    "Event Dates: " & Dte_Start_EditExpense.SelectedDate & " - " & Dte_End_EditExpense.SelectedDate &"<br>" & 
+                    "Approval Type: " & varApprovalType & "<br>"&
+                    "Total Amount: $" & varTotalAmount & "<br>" &
+                    "Status: Approved" & "<br><br><br>" &
+                    "Expense Details:" & "<br>" &
+                    Concat(
+                        Filter(
+                            'Expense Report Details',
+                            'Associated Event' = Txt_Event_EditExpenses.Text
+                        ),
+                        "---------------------------------------------------------------------------------<br><br>" &
+                        "Expense Name: " & Expense & 
+                        "<br>Amount: $" & Amount &
+                        "<br>Transaction Date: " & Text('Transaction Date', DateTimeFormat.ShortDate) &
+                        "<br>Category: " & Category &
+                        "<br>Vendor: " & Vendor &
+                        "<br>Project: " & Project &
+                        "<br>Billable: " & Billiable &
+                        "<br>Description: " & 'Expense Description' &
+                        "<br><br>"
+                    )
+                )
+            );
+            
+            //Requires Approval Level 1 ($200-$499)
+            If((Sum(varTotalAmount >= 200.00) && varTotalAmount < 500.00),
+                Office365Outlook.SendEmailV2(
+                    varRecipientsRequiresApprovalLevel1,
+                    "An Expense Report is Ready for Review",
+                    VarUser.FullName & " has submitted a new expense report for your review." & "<br>" & 
+                    "Expense Event: " &  Txt_Event_EditExpenses.Text & "<br>" & 
+                    "Event Dates: " & Dte_Start_EditExpense.SelectedDate & " - " & Dte_End_EditExpense.SelectedDate &"<br>" & 
+                    "Approval Type: " & varApprovalType & "<br>"&
+                    "Total Amount: $" & varTotalAmount & "<br>" & 
+                    "Please visit Expense Report Application for more details: <br>" &
+                    "https://apps.powerapps.com/play/e/361aad71-db61-e309-93d8-58cfe5bfe512/a/0667567b-444f-4275-b824-b1859bc211e1?tenantId=37321907-14a5-4390-987d-ec0c66c655cd&sourcetime=1721923617121"
+                )
+            );
+            
+            //Requires Approval Level 1 (Equal to or greater than $500)
+            If(varTotalAmount >= 500.00,
+                Office365Outlook.SendEmailV2(
+                    varRecipientsRequiresApprovalLevel2,
+                    "An Expense Report is Ready for Review",
+                    VarUser.FullName & " has submitted a new expense report for your review." & "<br>" & 
+                    "Expense Event: " &  Txt_Event_EditExpenses.Text & "<br>" & 
+                    "Event Dates: " & Dte_Start_EditExpense.SelectedDate & " - " & Dte_End_EditExpense.SelectedDate &"<br>" & 
+                    "Aproval Type: " & varApprovalType & "<br>"&
+                    "Total Amount: $" & varTotalAmount & "<br>" & 
+                    "Please visit Expense Report Application for more details: <br>" &
+                    "https://apps.powerapps.com/play/e/361aad71-db61-e309-93d8-58cfe5bfe512/a/0667567b-444f-4275-b824-b1859bc211e1?tenantId=37321907-14a5-4390-987d-ec0c66c655cd&sourcetime=1721923617121"
+                )
+            );
+            
+            //Confirmation Email to Submitter
+            If(varApprovalType = [@'Approval Types'].'Requires-Approval',
+            Office365Outlook.SendEmailV2(
+                VarUser.Email,
+                "Expense Report Submition Confirmation", VarUser.FullName & 
+                ", you have submitted a " & varApprovalType & " Expense Report : " & VarExpense.Event &
+                ". Your expense report is now PENDING for approval."
+            ),
+            Office365Outlook.SendEmailV2(
+                VarUser.Email,
+                "Expense Report Submition Confirmation", VarUser.FullName & 
+                ", you have submitted the Expense Report : " & VarExpense.Event &
+                ". Your expense report is APPROVED due to pre-approval status."
+            )
+            );
+            
+            Navigate(AllExpenses_Screen);
+        PressedBorderColor: =RGBA(0, 69, 120, 1)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(16, 110, 190, 1)
+        RadiusBottomLeft: =50
+        RadiusBottomRight: =50
+        RadiusTopLeft: =50
+        RadiusTopRight: =50
+        Size: =24
+        Text: ="Submit"
+        Width: =256
+        X: =344
+        Y: =1006
+        ZIndex: =15
+
+    Dte_Start_EditExpense As datepicker:
+        BorderColor: =RGBA(0, 46, 92, 1)
+        CalendarHeaderFill: =RGBA(16, 110, 190, 1)
+        Color: =RGBA(0, 46, 92, 1)
+        DefaultDate: =VarExpense.'Start Date'
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        DisabledFill: =RGBA(242, 242, 241, 0)
+        Fill: =RGBA(245, 245, 245, 1)
+        Font: =Font.'Segoe UI'
+        Height: =49
+        HoverDateFill: =RGBA(184, 187, 184, 1)
+        IconBackground: =RGBA(0, 120, 212, 1)
+        IconFill: =Color.White
+        InputTextPlaceholder: =If(IsBlank(Self.SelectedDate), Text(Today(), Self.Format, Self.Language))
+        PaddingTop: =5
+        SelectedDateFill: =RGBA(0, 120, 212, 1)
+        Size: =16
+        Width: =256
+        X: =344
+        Y: =241
+        ZIndex: =16
+
+    Btn_ReturnHome_EditExpense As button:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        DisabledFill: =RGBA(242, 242, 241, 0)
+        Fill: =RGBA(0, 4, 92, 1)
+        Font: =Font.'Segoe UI'
+        Height: =32
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 46, 92, 1)
+        OnSelect: =Navigate(Welcome_Screen)
+        PressedBorderColor: =RGBA(0, 69, 120, 1)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(16, 110, 190, 1)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =14
+        Text: ="Home"
+        Width: =113
+        X: =488
+        Y: =116
+        ZIndex: =19
+
+    Lbl_Event_EditExpenses_1 As label:
+        BorderColor: =RGBA(0, 69, 120, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 46, 92, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =70
+        PaddingTop: =20
+        Size: =18
+        Text: |-
+            ="Expense Items:"
+        Underline: =true
+        VerticalAlign: =VerticalAlign.Top
+        Width: =188
+        X: =41
+        Y: =354
+        ZIndex: =20
+
+    Label3 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 46, 92, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(161, 159, 157, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =57
+        Size: =12
+        Text: ="AddExpense"
+        Width: =104
+        X: =99
+        Y: =942
+        ZIndex: =21
+
